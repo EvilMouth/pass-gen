@@ -1,14 +1,15 @@
 <template>
-    <div>
-        <h1>密码生成器</h1>
-        <span id="pass">
-            {{ pass }}
-        </span>
-        <div>
+    <el-container id="pg" direction="vertical">
+        <el-container style="border-bottom:2px solid #fff">
+            <span id="pass">
+                {{ pass }}
+            </span>
             <el-button id="refreshBtn"
                 type="primary" class="el-icon-refresh" circle
                 @click="genPass">
             </el-button>
+        </el-container>
+        <div>
             <el-button id="copyPassBtn"
                 type="primary"
                 :data-clipboard-text="pass"
@@ -38,7 +39,7 @@
                 :key="option">{{ option }}
             </el-checkbox>
         </el-checkbox-group>
-    </div>
+    </el-container>
 </template>
 
 <script>
@@ -111,8 +112,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+#pg
+    padding 20px
 #pass
     font-size 30px
-    font-family "Helvetica Neue"
+    width fit-content
+#refreshBtn
+    text-align right 
 </style>
 
