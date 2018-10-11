@@ -27,7 +27,8 @@ export default {
   padding-bottom: 60px;
 }
 body {
-  margin: 0px;
+  max-width: 700px;
+  margin: 0 auto;
   background-color: black;
 }
 </style>
