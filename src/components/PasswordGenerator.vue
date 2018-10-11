@@ -7,7 +7,7 @@
         </div>
         <div class="block">
             <span>长度：{{ passlength }}</span>
-            <el-slider v-model="passlength" :show-tooltip="false"></el-slider>
+            <el-slider v-model="passlength" :show-tooltip="false" :min="4" :max="40"></el-slider>
         </div>
         <el-checkbox-group :min="1" v-model="use" @change="genpass">
             <el-checkbox v-for="option in useOptions" :label="option" :key="option">{{ option }}</el-checkbox>
