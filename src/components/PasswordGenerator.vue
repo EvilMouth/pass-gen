@@ -1,16 +1,42 @@
 <template>
     <div>
-        <span id="pass">{{ pass }}</span>
+        <h1>密码生成器</h1>
+        <span id="pass">
+            {{ pass }}
+        </span>
         <div>
-            <el-button id="refreshBtn" type="primary" class="el-icon-refresh" circle @click="genpass"></el-button>
-            <el-button id="copyPassBtn" type="primary" :data-clipboard-text="pass" @click="copyPass">{{ copyPassTips }}</el-button>
+            <el-button id="refreshBtn"
+                type="primary" class="el-icon-refresh" circle
+                @click="genPass">
+            </el-button>
+            <el-button id="copyPassBtn"
+                type="primary"
+                :data-clipboard-text="pass"
+                @click="copyPass">
+                {{ copyPassTips }}
+            </el-button>
         </div>
         <div class="block">
-            <span>长度：{{ passlength }}</span>
-            <el-slider v-model="passlength" :show-tooltip="false" :min="4" :max="40"></el-slider>
+            <span>
+                长度：{{ passLength }}
+            </span>
+            <el-slider
+                v-model="passLength"
+                @change="genPass"
+                :show-tooltip="false"
+                :min="4"
+                :max="40">
+            </el-slider>
         </div>
-        <el-checkbox-group :min="1" v-model="use" @change="genpass">
-            <el-checkbox v-for="option in useOptions" :label="option" :key="option">{{ option }}</el-checkbox>
+        <el-checkbox-group
+            :min="1"
+            v-model="use"
+            @change="genPass">
+            <el-checkbox
+                v-for="option in useOptions"
+                :label="option"
+                :key="option">{{ option }}
+            </el-checkbox>
         </el-checkbox-group>
     </div>
 </template>
@@ -30,23 +56,23 @@ export default {
     data() {
         return {
             pass: '',
-            passlength: 16,
+            passLength: 16,
             use: [letterName,numberName],
             useOptions: useOptions,
             copyPassTips: '复制密码'
         }
     },
     methods: {
-        genpass() {
-            let seed = this.getseed()
+        genPass() {
+            let seed = this.getSeed()
             let seedlength = seed.length
             let pass = ''
-            for (let i = 0; i < this.passlength; i++) {
+            for (let i = 0; i < this.passLength; i++) {
                 pass += seed[Math.floor(Math.random() * seedlength)]
             }
             this.pass = pass
         },
-        getseed() {
+        getSeed() {
             let seed = []
             if (this.use.includes(letterName)) {
                 seed = seed.concat(letter)
@@ -69,12 +95,17 @@ export default {
                 clipboard.destroy()
             })
             clipboard.on('error', () => {
+                this.$message({
+                    showClose: true,
+                    message: '复制失败',
+                    type: 'error'
+                })
                 clipboard.destroy()
             })
         }
     },
     created() {
-        this.genpass()
+        this.genPass()
     }
 }
 </script>
