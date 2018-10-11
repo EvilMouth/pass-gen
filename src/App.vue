@@ -23,12 +23,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ffffff;
-  background-color: black;
   padding-top: 60px;
   padding-bottom: 60px;
-  height: -webkit-fill-available;
 }
 body {
   margin: 0px;
+  background-color: black;
 }
 </style>

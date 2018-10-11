@@ -1,15 +1,15 @@
 <template>
-    <el-container id="pg" direction="vertical">
-        <el-container style="border-bottom:2px solid #fff">
-            <span id="pass">
+    <div class="backgroud">
+        <div class="passLayout">
+            <span class="passText">
                 {{ pass }}
             </span>
-            <el-button id="refreshBtn"
-                type="primary" class="el-icon-refresh" circle
+            <el-button class="el-icon-refresh refreshBtn"
+                type="primary" circle
                 @click="genPass">
             </el-button>
-        </el-container>
-        <div>
+        </div>
+        <div class="copyPassLayout">
             <el-button id="copyPassBtn"
                 type="primary"
                 :data-clipboard-text="pass"
@@ -17,13 +17,12 @@
                 {{ copyPassTips }}
             </el-button>
         </div>
-        <div class="block">
+        <div class="passLengthLayout">
             <span>
                 长度：{{ passLength }}
             </span>
             <el-slider
                 v-model="passLength"
-                @change="genPass"
                 :show-tooltip="false"
                 :min="4"
                 :max="40">
@@ -39,28 +38,40 @@
                 :key="option">{{ option }}
             </el-checkbox>
         </el-checkbox-group>
-    </el-container>
+    </div>
 </template>
 
 <script>
 import Clipboard from 'clipboard'
 
-const letter = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','m','n','p','Q','r','s','t','u','v','w','x','y','z']
-const number = ['0','1','2','3','4','5','6','7','8','9']
-const symbol = ['!','@','#','$','%','^','&','*','(',')','_','+','-','=','{','[','}',']',':',';',',','<','.','>','/','?','"',"'",'|','\\']
-const letterName = '字母'
-const numberName = '数字'
-const symbolName = '符号'
-const useOptions = [letterName,numberName,symbolName]
+const letter = {
+    name: '字母',
+    value: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'p', 'Q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+}
+const number = {
+    name: '数字',
+    value: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+}
+const symbol = {
+    name: '符号',
+    value: ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '{', '[', '}', ']', ':', ';', ', ', '<', '.', '>', '/', '?', '"',"'", '|', '\\']
+}
+const useOptions = [letter.name, number.name, symbol.name]
+
 export default {
     name: 'PasswordGenerator',
     data() {
         return {
             pass: '',
             passLength: 16,
-            use: [letterName,numberName],
+            use: [letter.name, number.name],
             useOptions: useOptions,
             copyPassTips: '复制密码'
+        }
+    },
+    watch: {
+        passLength() {
+            this.genPass()
         }
     },
     methods: {
@@ -75,14 +86,14 @@ export default {
         },
         getSeed() {
             let seed = []
-            if (this.use.includes(letterName)) {
-                seed = seed.concat(letter)
+            if (this.use.includes(letter.name)) {
+                seed = seed.concat(letter.value)
             }
-            if (this.use.includes(numberName)) {
-                seed = seed.concat(number)
+            if (this.use.includes(number.name)) {
+                seed = seed.concat(number.value)
             }
-            if (this.use.includes(symbolName)) {
-                seed = seed.concat(symbol)
+            if (this.use.includes(symbol.name)) {
+                seed = seed.concat(symbol.value)
             }
             return seed
         },
@@ -112,12 +123,26 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#pg
+.backgroud
     padding 20px
-#pass
+    word-break break-all
+.passLayout
+    min-height 60px
+    text-align left
+    display flex
+    align-items center
+    border-bottom 2px solid #ffffff
+.passText
     font-size 30px
-    width fit-content
-#refreshBtn
-    text-align right 
+    flex 1
+.refreshBtn
+    width 40px
+    height 40px
+.copyPassLayout
+    margin-top 20px
+    text-align right
+.passLengthLayout
+    margin-top 20px
+    text-align left
 </style>
 
