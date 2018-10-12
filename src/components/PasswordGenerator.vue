@@ -134,7 +134,7 @@ export default {
     align-items center
     border-bottom 2px solid #ffffff
 .passText
-    font-size 30px
+    font-size 25px
     flex 1
 .refreshBtn
     width 40px
