@@ -65,7 +65,7 @@ export default {
         return {
             pass: '',
             passLength: 16,
-            use: [letter.name, number.name],
+            use: [letter.name, number.name, symbol.name],
             encryptOptions: encryptOptions,
             copyPassTips: '复制密码'
         }
@@ -77,13 +77,33 @@ export default {
     },
     methods: {
         genPass() {
+            let passArr = this.getDefaultArr()
             let seed = this.getSeed()
             let seedlength = seed.length
-            let pass = ''
-            for (let i = 0; i < this.passLength; i++) {
-                pass += seed[Math.floor(Math.random() * seedlength)]
+            for (let i = passArr.length; i < this.passLength; i++) {
+                passArr.push(seed[Math.floor(Math.random() * seedlength)])
             }
-            this.pass = pass
+            let newPassArr = []
+            for (let i = 0; i < this.passLength; i++) {
+                newPassArr.push(passArr.splice(Math.random() * passArr.length, 1)[0])
+            }
+            this.pass = newPassArr.join('')
+        },
+        getDefaultArr() {
+            let arr = []
+            if (this.use.includes(letter.name)) {
+                arr.push(this.getOne(letter.value))
+            }
+            if (this.use.includes(number.name)) {
+                arr.push(this.getOne(number.value))
+            }
+            if (this.use.includes(symbol.name)) {
+                arr.push(this.getOne(symbol.value))
+            }
+            return arr
+        },
+        getOne(arr) {
+            return arr[Math.floor(Math.random() * arr.length)]
         },
         getSeed() {
             let seed = []
