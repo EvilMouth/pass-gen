@@ -29,11 +29,12 @@
             </el-slider>
         </div>
         <el-checkbox-group
+            class="encryptOptionsLayout"
             :min="1"
-            v-model="use"
-            @change="genPass">
+            @change="genPass"
+            v-model="use">
             <el-checkbox
-                v-for="option in useOptions"
+                v-for="option in encryptOptions"
                 :label="option"
                 :key="option">{{ option }}
             </el-checkbox>
@@ -56,7 +57,7 @@ const symbol = {
     name: '符号',
     value: ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '{', '[', '}', ']', ':', ';', ', ', '<', '.', '>', '/', '?', '"',"'", '|', '\\']
 }
-const useOptions = [letter.name, number.name, symbol.name]
+const encryptOptions = [letter.name, number.name, symbol.name]
 
 export default {
     name: 'PasswordGenerator',
@@ -65,7 +66,7 @@ export default {
             pass: '',
             passLength: 16,
             use: [letter.name, number.name],
-            useOptions: useOptions,
+            encryptOptions: encryptOptions,
             copyPassTips: '复制密码'
         }
     },
@@ -144,5 +145,7 @@ export default {
 .passLengthLayout
     margin-top 20px
     text-align left
+.encryptOptionsLayout
+    margin-top 20px
 </style>
 
