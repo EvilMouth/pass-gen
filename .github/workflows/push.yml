@@ -28,5 +28,5 @@ jobs:
         username: 'root'
         server: '${{ secrets.SSH_IP }}'
         ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-        local_path: './dist/*'
-        remote_path: '/home/zyhang/project/pass_gen/dist/'
+        local_path: './dist/'
+        remote_path: '/home/zyhang/project/pass_gen/'
