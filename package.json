@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "clipboard": "^2.0.1",
+    "crypto-js": "^4.1.1",
     "element-ui": "^2.4.8",
     "vue": "^2.5.17"
   },
