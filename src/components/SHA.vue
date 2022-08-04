@@ -73,12 +73,12 @@ export default {
             const lastLetter = this.findLastLetter(pass)
             // replace with caps
             if (this.use.includes(caps.name)) {
-                const i = firstLetter.charCodeAt() % 8
+                const i = firstLetter.charCodeAt() % 7
                 pass = pass.slice(0, i) + firstLetter.toUpperCase() + pass.slice(i)
             }
             // replace with symbol
             if (this.use.includes(symbol.name)) {
-                const i = lastLetter.charCodeAt() % 8
+                const i = lastLetter.charCodeAt() % 7
                 const symbol = ','
                 pass = pass.slice(0, i) + symbol + pass.slice(i)
             }
