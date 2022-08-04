@@ -62,24 +62,39 @@ export default {
     },
     methods: {
         genPass() {
-            let pass = CryptoJS.HmacSHA1(this.x, this.y).toString()
+            if (this.x.length == 0 || this.y.length == 0) {
+                this.pass = ''
+                return
+            }
+            const x = CryptoJS.HmacMD5(this.x, '45').toString()
+            const y = CryptoJS.HmacMD5(this.y, x).toString()
+            let pass = CryptoJS.HmacSHA1(x, y).toString()
             const firstLetter = this.findFirstLetter(pass)
-            pass = firstLetter + pass // make sure first pass is letter
+            const lastLetter = this.findLastLetter(pass)
             // replace with caps
             if (this.use.includes(caps.name)) {
-                const i = 3
+                const i = firstLetter.charCodeAt() % 8
                 pass = pass.slice(0, i) + firstLetter.toUpperCase() + pass.slice(i)
             }
             // replace with symbol
             if (this.use.includes(symbol.name)) {
-                const i = 7
+                const i = lastLetter.charCodeAt() % 8
                 const symbol = ','
                 pass = pass.slice(0, i) + symbol + pass.slice(i)
             }
+            pass = lastLetter + pass // make sure first pass is letter
             pass = pass.slice(0, this.passLength)
             this.pass = pass
         },
         findFirstLetter(str) {
+            for (let i = 0, j = str.length; i < j; i++) {
+                if (str[i].match(/[a-z]/i)) {
+                    return str[i].toLowerCase()
+                }
+            }
+            return 'e'
+        },
+        findLastLetter(str) {
             for (let i = str.length - 1; i >= 0; i--) {
                 if (str[i].match(/[a-z]/i)) {
                     return str[i].toLowerCase()
