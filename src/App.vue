@@ -1,24 +1,19 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/yeah-215x215.png">
-    <password-generator/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import PasswordGenerator from './components/PasswordGenerator.vue'
-
 export default {
-  name: 'app',
-  components: {
-    PasswordGenerator
-  }
+  name: 'app'
 }
 </script>
 
 <style>
 #app {
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -26,6 +21,7 @@ export default {
   padding-top: 60px;
   padding-bottom: 60px;
 }
+
 body {
   max-width: 700px;
   margin: 0 auto;
