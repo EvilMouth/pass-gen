@@ -3,6 +3,8 @@ import App from './App.vue'
 import { Button, Slider, CheckboxGroup, Checkbox, Input } from 'element-ui'
 import router from './router'
 
+import './assets/override.css'
+
 Vue.config.productionTip = false
 
 Vue.use(Button)

@@ -1,9 +1,9 @@
 <template>
     <div class="backgroud">
-        <div class="passLayout">
+        <div class="inputLayout">
             <el-input v-model="x" placeholder="input x" @input="genPass"></el-input>
         </div>
-        <div class="passLayout">
+        <div class="inputLayout">
             <el-input v-model="y" placeholder="input y" @input="genPass"></el-input>
         </div>
         <div class="passLayout">
@@ -116,6 +116,11 @@ export default {
 .backgroud
     padding 20px
     word-break break-all
+.inputLayout
+    min-height 60px
+    text-align left
+    display flex
+    align-items center
 .passLayout
     min-height 60px
     text-align left
@@ -125,9 +130,6 @@ export default {
 .passText
     font-size 25px
     flex 1
-.refreshBtn
-    width 40px
-    height 40px
 .copyPassLayout
     margin-top 20px
     text-align right
