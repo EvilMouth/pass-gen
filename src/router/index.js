@@ -12,13 +12,13 @@ const routes = [
     {
         path: "/sha",
         name: "sha",
-        component: () => import(/* webpackChunkName: "about" */ "../components/SHA.vue")
+        component: () => import(/* webpackChunkName: "xy" */ "../components/SHA.vue")
     },
 ]
 
 
 const router = new VueRouter({
-    mode: "history",
+    mode: "hash",
     routes
 })
 
